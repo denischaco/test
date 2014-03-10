@@ -1,0 +1,46 @@
+<div class="menu">
+    <a class="item-menu" href="#">· Seleccionar Usuario</a>
+    <a class="item-menu" href="#marcar_punto">· Marcar Lugar</a>
+    <a class="item-menu" href="#marcar_alerta">· Marcar Alerta</a>
+    <a class="item-menu" href="#puntos">· Ver Lugares</a>
+    <a class="item-menu" href="#ver_alertas">· Ver Aquí</a>
+    <div style="margin: 15px;float: right;" ng-show="usuario" ng-controller="SeleccionarUsuario">Hola: {{usuario.nombre}}</div>
+</div>   
+
+<div class="inicio" ng-show="longitud" ng-controller="MarcarAlerta">
+	<form method="POST" id="formulario_alerta" >
+		<div class="titulo-inicio">MARCAR ALERTA!</div>
+
+        <input type="hidden" name="usuario" value="{{ usuario.id }}">
+        <input type="hidden" name="longitud" value="{{ longitud }}">
+        <input type="hidden" name="latitud" value="{{ latitud }}">
+
+		<div class="item-inicio">Título</div>
+
+		<input class="input-inicio" ng-model="titulo_alerta" placeholder="Qué pasó ahi?"/>
+
+		<textarea class="input-inicio" ng-model="descripcion_alerta" placeholder="Contános un poco más"></textarea>
+
+		<div class="item-inicio">Categoría</div>
+        <div ng-controller="GestionCategorias" class="item-inicio" style="height: 160px;">
+            <div>		                
+                <input class="input-inicio" type="text" ng-model="filtro_categoria" placeholder="Filtro"\>
+            </div>
+            </br>
+
+            <div>
+                <div ng-repeat="categoria in categorias | filter:filtro_categoria" style="background-color: {{ categoria.color }};">
+                    <input type="checkbox" name="categoria[{{categoria.id}}]" value="{{categoria.nombre}}" ng-model="categoria.seleccionada" ng-checked="categoria.seleccionada">
+                    {{categoria.nombre}}
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="select-inicio" >
+            <div align="center">
+                <a class="bt-siguiente" ng-click="enviar_alerta(usuario.id,titulo_alerta, descripcion_alerta, longitud, latitud )" style="cursor:pointer;">GUARDAR</a>
+            </div>
+        </div>        
+	</form>
+</div>

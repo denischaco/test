@@ -1,0 +1,20 @@
+<div class="menu">
+	<a class="item-menu" href="#">· Seleccionar Usuario</a>
+    <a class="item-menu" href="#marcar_punto">· Marcar Lugar</a>
+    <a class="item-menu" href="#marcar_alerta">· Marcar Alerta</a>
+    <a class="item-menu" href="#puntos">· Ver Lugares</a>
+    <a class="item-menu" href="#ver_alertas">· Ver Aquí</a>
+    <div style="margin: 15px;float: right;" ng-show="usuario" ng-controller="SeleccionarUsuario">Hola: {{usuario.nombre}}</div>
+</div>                
+
+
+<div class="titulo-seccion">Mis Lugares</div>
+	<div class="fila-items" ng-repeat="punto in puntos" >
+		<div class="img-item">
+			<img src="img/icons-15.png" />
+		</div>
+		
+		<div ng-controller="VerAlertas" ng-click="ver_alertas_punto(punto.latitud,punto.longitud)" class="titulo-item" >{{punto.titulo}} ({{punto.latitud}},{{punto.longitud}})</div>
+		
+	</div>
+</div>
