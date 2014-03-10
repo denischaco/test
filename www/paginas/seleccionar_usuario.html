@@ -1,0 +1,17 @@
+
+
+<div class="inicio" ng-controller="SeleccionarUsuario">
+    <div class="titulo-inicio">SELECCIONE USUARIO</div>
+
+    <select ng-model="usuario" ng-options="u.nombre for u in usuarios" class="select-inicio"></select>
+
+    <br>
+
+    <div class="select-inicio">
+        <div align="center">
+            <a href="#marcar_punto" class="bt-siguiente" ng-click="guardar_usuario(usuario)">SIGUENTE</a>
+        </div>
+    </div>
+</div>
+
+
