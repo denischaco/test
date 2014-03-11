@@ -13,8 +13,9 @@
 		<div class="img-item">
 			<img src="img/icons-15.png" />
 		</div>
-		
-		<div ng-controller="VerAlertas" ng-click="ver_alertas_punto(punto.latitud,punto.longitud)" class="titulo-item" >{{punto.titulo}} ({{punto.latitud}},{{punto.longitud}})</div>
+		<a ng-href="#ver_alertas_en/{{punto.id}}">
+			<div ng-controller="VerAlertas"  class="titulo-item" >{{punto.titulo}} ({{punto.latitud}},{{punto.longitud}})</div>
+		</a>
 		
 	</div>
 </div>

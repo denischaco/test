@@ -90,25 +90,25 @@
 
 
       ServicioUbicacion.Geolocalizar = function($scope) {
-            console.log("Va a Geolocalizar");
-             geolocation.getLocation().then(function(data){
+            //console.log("Va a Geolocalizar");
+            geolocation.getLocation().then(function(data){
               $rootScope.latitud = data.coords.latitude;
               $rootScope.longitud = data.coords.longitude;
-              console.log("rootScope.latitud: " + $rootScope.latitud);
-              console.log("rootScope.longitud: " + $rootScope.longitud);
+              //console.log("rootScope.latitud: " + $rootScope.latitud);
+              //console.log("rootScope.longitud: " + $rootScope.longitud);
             });
 
 
 
             this.latitud = $rootScope.latitud;
             this.longitud = $rootScope.longitud;
-            console.log("this.latitud: " + this.latitud);
-            console.log("this.longitud: " + this.longitud);
+            //console.log("this.latitud: " + this.latitud);
+            //console.log("this.longitud: " + this.longitud);
             this.GuardarUbicacion();
       };
 
       ServicioUbicacion.GuardarUbicacion = function() {
-          console.log("LAta:" + this.latitud + "LONGa:" + this.longitud);
+          //console.log("LAta:" + this.latitud + "LONGa:" + this.longitud);
           $rootScope.$broadcast('UsuarioUbicado');
 
       };
@@ -125,7 +125,7 @@
       ServicioPunto.puntos = null; // INICIALIZACION
       //console.log(" INICIALIZACION Puntos");
       ServicioPunto.CargarPuntos = function(puntos) {
-          //console.log("CargarPuntos "  + puntos.length);
+          console.log("CargarPuntos "  + puntos.length);
           this.puntos = puntos;
 
           this.GuardarPuntos();
@@ -136,11 +136,6 @@
           $rootScope.$broadcast('PuntosActualizados');
       };
 
-      ServicioPunto.VerCoordenadas = function(punto)
-      {
-          var respuesta = {latitud:this.puntos[punto.id], longitud:this.puntos[punto.id]}; 
-          return respuesta;
-      };
       return ServicioPunto;
   });
   //SERVICIO PARA CONTROLAR LOS PUNTOS DEL USUARIO
@@ -306,7 +301,7 @@
   VerAlertas.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','$location','$http']; 
 
 
-  function VerAlertasEn($scope,ServiciosUsuario,ServiciosUbicacion,ServiciosPuntos,$location,$http,$routeParams)
+  function VerAlertasEn($scope,ServiciosUsuario,ServiciosUbicacion,ServiciosPuntos,$location,$http,$routeParams,$filter)
   {
 
     //CONTROL POR SI NO SELECCIONO EL USUARIO
@@ -316,10 +311,19 @@
     }
     //CONTROL POR SI NO SELECCIONO EL USUARIO
 
-    //console.log("VER ALERTAS DE PUNTO: " + $routeParams.punto );
-    //console.log("scope.latitud = " + $scope.latitud);
-    //console.log("scope.longitud = " + $scope.longitud);
-    $scope.coordenadas = ServiciosPuntos.VerCoordenadas($routeParams.punto);
+    console.log("VER ALERTAS DE PUNTO: " + $routeParams.punto );
+    console.log("scope.latitud = " + $scope.latitud);
+    console.log("scope.longitud = " + $scope.longitud);
+
+    $scope.queryData = $filter('filter')(ServiciosPuntos.puntos, "id = 78");
+    for (var i = 0; i < ServiciosPuntos.puntos.length; i++) {
+      if (ServiciosPuntos.puntos[i].id === $routeParams.punto) {
+        $scope.latitud = ServiciosPuntos.puntos[i].latitud;
+        $scope.longitud = ServiciosPuntos.puntos[i].longitud;
+      }
+    }
+    console.log("scope.latitud = " + $scope.latitud);
+    console.log("scope.longitud = " + $scope.longitud);
 
     //console.log("VALORES DE PUNTO: " + $scope.coordenadas.latitud + ", " + $scope.coordenadas.longitud );
 
@@ -344,10 +348,14 @@
     $scope.$on('UsuarioUbicado', function() {
         $scope.latitud = ServiciosUbicacion.latitud;
         $scope.longitud = ServiciosUbicacion.longitud;
+    });  
+    $scope.$on('PuntosActualizados', function() {
+        console.log("PuntosActualizados "  + ServiciosPuntos.puntos.length);
+        $scope.puntos = ServiciosPuntos.puntos;
     });             
     //SERVICIOS FIN
   }
-  VerAlertasEn.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','ServiciosPuntos','$location','$http','$routeParams'];
+  VerAlertasEn.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','ServiciosPuntos','$location','$http','$routeParams','$filter'];
 
   //AlertasApp.controller('MisPuntos', function($scope,$http) {
   function MisPuntos($scope,ServiciosUsuario,ServiciosUbicacion,ServiciosPuntos,$location,$http){  
