@@ -90,15 +90,20 @@
 
 
       ServicioUbicacion.Geolocalizar = function($scope) {
-
+            console.log("Va a Geolocalizar");
              geolocation.getLocation().then(function(data){
               $rootScope.latitud = data.coords.latitude;
               $rootScope.longitud = data.coords.longitude;
-              
+              console.log("rootScope.latitud: " + $rootScope.latitud);
+              console.log("rootScope.longitud: " + $rootScope.longitud);
             });
+
+
 
             this.latitud = $rootScope.latitud;
             this.longitud = $rootScope.longitud;
+            console.log("this.latitud: " + this.latitud);
+            console.log("this.longitud: " + this.longitud);
             this.GuardarUbicacion();
       };
 
@@ -118,15 +123,16 @@
       var ServicioPunto = {};
 
       ServicioPunto.puntos = null; // INICIALIZACION
-
+      //console.log(" INICIALIZACION Puntos");
       ServicioPunto.CargarPuntos = function(puntos) {
-
+          //console.log("CargarPuntos "  + puntos.length);
           this.puntos = puntos;
 
           this.GuardarPuntos();
       };
 
       ServicioPunto.GuardarPuntos = function() {
+          //console.log("GuardarPuntos");
           $rootScope.$broadcast('PuntosActualizados');
       };
 
@@ -174,10 +180,10 @@
 
     //GUARDAR PUNTO
     $scope.enviar = function(user_id, titulo, longitud, latitud) {
-      console.log("Guardar user_id: " + user_id);
-      console.log("Guardar titulo: " + titulo);
-      console.log("Guardar longitud: " + longitud);
-      console.log("Guardar latitud: " + latitud);
+      //console.log("Guardar user_id: " + user_id);
+      //console.log("Guardar titulo: " + titulo);
+      //console.log("Guardar longitud: " + longitud);
+      //console.log("Guardar latitud: " + latitud);
 
       $ruta = "http://mumaplay.com/ANR/guardar_punto.php?callback=JSON_CALLBACK";
       $ruta = $ruta + "&usuario=" + user_id;
@@ -224,11 +230,11 @@
 
     //GUARDAR ALERTA
     $scope.enviar_alerta = function(user_id, titulo_alerta, descripcion_alerta, longitud, latitud) {
-      console.log("Guardar user_id: " + user_id);
-      console.log("Guardar titulo_alerta: " + titulo_alerta);
-      console.log("Guardar descripcion_alerta: " + descripcion_alerta);
-      console.log("Guardar longitud: " + longitud);
-      console.log("Guardar latitud: " + latitud);
+      //console.log("Guardar user_id: " + user_id);
+      //console.log("Guardar titulo_alerta: " + titulo_alerta);
+      //console.log("Guardar descripcion_alerta: " + descripcion_alerta);
+      //console.log("Guardar longitud: " + longitud);
+      //console.log("Guardar latitud: " + latitud);
 
       $ruta = "http://mumaplay.com/ANR/guardar_alerta.php?callback=JSON_CALLBACK";
       $ruta = $ruta + "&usuario=" + user_id;
@@ -270,6 +276,8 @@
     }
     //CONTROL POR SI NO SELECCIONO EL USUARIO
 
+    ServiciosUbicacion.Geolocalizar();
+
     $ruta = "http://mumaplay.com/ANR/traer_alertas.php?callback=JSON_CALLBACK";
     $ruta = $ruta + "&latitud=" + $scope.latitud;
     $ruta = $ruta + "&longitud=" + $scope.longitud;
@@ -308,12 +316,12 @@
     }
     //CONTROL POR SI NO SELECCIONO EL USUARIO
 
-    console.log("VER ALERTAS DE PUNTO: " + $routeParams.punto );
-    console.log("scope.latitud = " + $scope.latitud);
-    console.log("scope.longitud = " + $scope.longitud);
+    //console.log("VER ALERTAS DE PUNTO: " + $routeParams.punto );
+    //console.log("scope.latitud = " + $scope.latitud);
+    //console.log("scope.longitud = " + $scope.longitud);
     $scope.coordenadas = ServiciosPuntos.VerCoordenadas($routeParams.punto);
 
-    console.log("VALORES DE PUNTO: " + $scope.coordenadas.latitud + ", " + $scope.coordenadas.longitud );
+    //console.log("VALORES DE PUNTO: " + $scope.coordenadas.latitud + ", " + $scope.coordenadas.longitud );
 
     $ruta = "http://mumaplay.com/ANR/traer_alertas.php?callback=JSON_CALLBACK";
     $ruta = $ruta + "&latitud=" + $scope.latitud;
@@ -361,6 +369,7 @@
         url: $ruta,            
       }).success(function(data, status, headers, config) {
         //$scope.puntos = data;
+        //console.log("Va a actualizar los puntos " + data.length);
         ServiciosPuntos.CargarPuntos(data);
       }).error(function(data, status, headers, config) {
         //$scope.puntos = null;
@@ -376,12 +385,13 @@
         $scope.longitud = ServiciosUbicacion.longitud;
     }); 
     $scope.$on('PuntosActualizados', function() {
-        $scope.puntos = ServiciosUbicacion.puntos;
+        //console.log("PuntosActualizados "  + ServiciosPuntos.puntos.length);
+        $scope.puntos = ServiciosPuntos.puntos;
     });                   
     //SERVICIOS FIN      
   }
    
-  MisPuntos.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','$location','$http'];
+  MisPuntos.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','ServiciosPuntos','$location','$http'];
 
 
   // CATEGORIAS INICIO
