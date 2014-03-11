@@ -40,8 +40,10 @@
         templateUrl : 'paginas/puntos.html',
         controller  : 'MisPuntos'
       })
-
-      ;
+      .otherwise({
+        redirectTo: '/'
+      });
+      
   });
 
   // DECLARACION DE SERVICIOS INICIO
