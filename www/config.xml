@@ -2,9 +2,9 @@
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>AlertasApp</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Primer Sprint
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
+    <author email="denis@bitsmkt.com" href="http://bitsmkt.com">
         Bits
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
