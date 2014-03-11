@@ -132,7 +132,8 @@
 
       ServicioPunto.VerCoordenadas = function(punto)
       {
-          return ["latitud" => this.puntos[punto.id] , "longitud" => this.puntos[punto.id]];
+          var respuesta = {latitud:this.puntos[punto.id], longitud:this.puntos[punto.id]}; 
+          return respuesta;
       };
       return ServicioPunto;
   });
