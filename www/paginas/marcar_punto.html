@@ -23,10 +23,16 @@
 			<input class="input-inicio" type="text" ng-model="filtro_categoria" placeholder="Buscar"\>
 
 	        <!-- GESTION DE CATEGORIAS INICIO -->
-	        <div  class="select-inicio" style="height: 150px;" ng-controller="GestionCategorias">
-                <div ng-repeat="categoria in categorias | filter:filtro_categoria" class="select-inicio">
-                    <input type="checkbox" name="categoria[{{categoria.id}}]" value="{{categoria.nombre}}" ng-model="categoria.seleccionada" ng-checked="categoria.seleccionada">
-                    {{categoria.nombre}}
+	        <div  class="select-inicio" style="height: 150px;width: 250px;margin: 3% 0% 5% 42%;" ng-controller="GestionCategorias">
+                <div ng-repeat="categoria in categorias | filter:filtro_categoria" class="select-inicio" style="width: 180px;">
+                    <div style="background-color:white;border-radius:100px;width: 45px;float: left;">
+	                    <img src="img/{{categoria.icono}}" style="margin: 3px 0px -4px;" />
+                    </div> 
+                    <div style="margin-top: 5px;float: left;">
+                    	<input type="checkbox" name="categoria[{{categoria.id}}]" value="{{categoria.nombre}}" ng-model="categoria.seleccionada" ng-checked="categoria.seleccionada">
+                    	{{categoria.nombre}}
+                	</div>
+
                 </div>
 	        </div>
 	        <!-- GESTION DE CATEGORIAS FIN --> 		

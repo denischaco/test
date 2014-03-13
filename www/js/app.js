@@ -163,9 +163,9 @@
   function MarcarPunto($scope, ServiciosUsuarios,ServiciosUbicacion,$location,$http) {  
 
     $scope.categorias = [
-      {id:'1',nombre:'Gourmet',seleccionada:false,color:"rgb(163, 163, 224)"},
-      {id:'2',nombre:'Tránsito',seleccionada:false,color:"rgb(151, 245, 33)"},
-      {id:'3',nombre:'Deporte',seleccionada:false,color:"rgb(243, 243, 66)"},
+      {id:'1',nombre:'Gourmet',seleccionada:false,icono:"icons-12.png"},
+      {id:'2',nombre:'Tránsito',seleccionada:false,icono:"icons-13.png"},
+      {id:'3',nombre:'Deporte',seleccionada:false,icono:"icons-14.png"},
       ];
 
     //CONTROL POR SI NO SELECCIONO EL USUARIO
