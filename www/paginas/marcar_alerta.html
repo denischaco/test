@@ -22,24 +22,19 @@
 		<textarea class="input-inicio" ng-model="descripcion_alerta" placeholder="Contános un poco más"></textarea>
 
 		<div class="item-inicio">Categoría</div>
-        <div ng-controller="GestionCategorias" class="item-inicio" style="height: 160px;">
-            <div>		                
-                <input class="input-inicio" type="text" ng-model="filtro_categoria" placeholder="Filtro"\>
-            </div>
-            </br>
+        <div  class="item-inicio" style="height: 220px;" >
 
-            <div>
-                <div ng-repeat="categoria in categorias | filter:filtro_categoria" style="background-color: {{ categoria.color }};">
-                    <input type="checkbox" name="categoria[{{categoria.id}}]" value="{{categoria.nombre}}" ng-model="categoria.seleccionada" ng-checked="categoria.seleccionada">
+            <select class="input-inicio" ng-model="categoria_seleccionada">
+                <option ng-repeat="categoria in categorias | filter:filtro_categoria" class="select-inicio" value="{{categoria.id}}">
                     {{categoria.nombre}}
-                </div>
+                </option>
                 
-            </div>
+            </select>
         </div>
 
-        <div class="select-inicio" >
+        <div class="select-inicio" ng-show="categoria_seleccionada"  >
             <div align="center">
-                <a class="bt-siguiente" ng-click="enviar_alerta(usuario.id,titulo_alerta, descripcion_alerta, longitud, latitud )" style="cursor:pointer;">GUARDAR</a>
+                <a  class="bt-siguiente" ng-click="enviar_alerta(usuario.id,titulo_alerta, descripcion_alerta, longitud, latitud,categoria_seleccionada )" style="cursor:pointer;">GUARDAR</a>
             </div>
         </div>        
 	</form>

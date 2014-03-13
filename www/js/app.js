@@ -149,6 +149,7 @@
 
     $scope.guardar_usuario = function(user) {
         ServiciosUsuarios.SeleccionarUsuario(user);
+        ServiciosUbicacion.Geolocalizar();
     };
         
     //SERVICIOS INICIO
@@ -160,6 +161,12 @@
   SeleccionarUsuario.$inject = ['$scope', 'ServiciosUsuarios'];
 
   function MarcarPunto($scope, ServiciosUsuarios,ServiciosUbicacion,$location,$http) {  
+
+    $scope.categorias = [
+      {id:'1',nombre:'Gourmet',seleccionada:false,color:"rgb(163, 163, 224)"},
+      {id:'2',nombre:'Tránsito',seleccionada:false,color:"rgb(151, 245, 33)"},
+      {id:'3',nombre:'Deporte',seleccionada:false,color:"rgb(243, 243, 66)"},
+      ];
 
     //CONTROL POR SI NO SELECCIONO EL USUARIO
     if (!$scope.usuario)
@@ -180,11 +187,23 @@
       //console.log("Guardar longitud: " + longitud);
       //console.log("Guardar latitud: " + latitud);
 
+      var lista = $scope.categorias;
+       $scope.lista = [];
+       var cate = "";
+       angular.forEach(lista, function(item) {
+          if (item.seleccionada)
+            { console.log(item.id);
+              cate = cate +","+item.id;}
+       });
+     
+       console.log(cate);
+
       $ruta = "http://mumaplay.com/ANR/guardar_punto.php?callback=JSON_CALLBACK";
       $ruta = $ruta + "&usuario=" + user_id;
       $ruta = $ruta + "&titulo=" + titulo;
       $ruta = $ruta + "&longitud=" + longitud;
       $ruta = $ruta + "&latitud=" + latitud;
+      $ruta = $ruta +  "&categorias=" + cate; 
 
       $http({
           method: 'JSONP',
@@ -211,6 +230,14 @@
   MarcarPunto.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','$location','$http'];
 
   function MarcarAlerta($scope,ServiciosUsuario,ServiciosUbicacion,$location,$http) {
+    $scope.categorias = [
+      {id:'1',nombre:'Gourmet',seleccionada:false,color:"rgb(163, 163, 224)"},
+      {id:'2',nombre:'Tránsito',seleccionada:false,color:"rgb(151, 245, 33)"},
+      {id:'3',nombre:'Deporte',seleccionada:false,color:"rgb(243, 243, 66)"},
+      ];
+
+    $scope.categoria_seleccionada = null; //INICIALIZACION
+
     //CONTROL POR SI NO SELECCIONO EL USUARIO
     if (!$scope.usuario)
     {
@@ -224,12 +251,13 @@
     ServiciosUbicacion.Geolocalizar();
 
     //GUARDAR ALERTA
-    $scope.enviar_alerta = function(user_id, titulo_alerta, descripcion_alerta, longitud, latitud) {
+    $scope.enviar_alerta = function(user_id, titulo_alerta, descripcion_alerta, longitud, latitud,categoria_seleccionada) {
       //console.log("Guardar user_id: " + user_id);
       //console.log("Guardar titulo_alerta: " + titulo_alerta);
       //console.log("Guardar descripcion_alerta: " + descripcion_alerta);
       //console.log("Guardar longitud: " + longitud);
-      //console.log("Guardar latitud: " + latitud);
+      //console.log("Guardar categoria_seleccionada: " + categoria_seleccionada);
+
 
       $ruta = "http://mumaplay.com/ANR/guardar_alerta.php?callback=JSON_CALLBACK";
       $ruta = $ruta + "&usuario=" + user_id;
@@ -237,6 +265,7 @@
       $ruta = $ruta + "&descripcion_alerta=" + descripcion_alerta;
       $ruta = $ruta + "&longitud=" + longitud;
       $ruta = $ruta + "&latitud=" + latitud;
+      $ruta = $ruta + "&categoria=" + categoria_seleccionada;
 
       $http({
           method: 'JSONP',
@@ -287,6 +316,11 @@
         $scope.alertas = null;
       });  
 
+    //$scope.filtro_radio = function(dataItem) {
+    //    return (dataItem.distancia < 1);
+    //};
+
+
     //SERVICIOS INICIO
     $scope.$on('UsuarioElegido', function() {
           $scope.usuario = ServiciosUsuarios.usuario;
@@ -330,6 +364,7 @@
     $ruta = "http://mumaplay.com/ANR/traer_alertas.php?callback=JSON_CALLBACK";
     $ruta = $ruta + "&latitud=" + $scope.latitud;
     $ruta = $ruta + "&longitud=" + $scope.longitud;
+    $ruta = $ruta + "&punto=" + $routeParams.punto;
 
     $http({
         method: 'JSONP',
@@ -340,6 +375,8 @@
       }).error(function(data, status, headers, config) {
         $scope.alertas = null;
       });  
+
+
 
     //SERVICIOS INICIO
     $scope.$on('UsuarioElegido', function() {
@@ -354,6 +391,8 @@
         $scope.puntos = ServiciosPuntos.puntos;
     });             
     //SERVICIOS FIN
+
+
   }
   VerAlertasEn.$inject = ['$scope', 'ServiciosUsuarios','ServiciosUbicacion','ServiciosPuntos','$location','$http','$routeParams','$filter'];
 
@@ -405,11 +444,11 @@
   // CATEGORIAS INICIO
   function GestionCategorias($scope)
   {
-      $scope.categorias = [
-      {id:'1',nombre:'Gourmet',seleccionada:false,color:"rgb(163, 163, 224)"},
-      {id:'2',nombre:'Tránsito',seleccionada:false,color:"rgb(151, 245, 33)"},
-      {id:'3',nombre:'Deporte',seleccionada:false,color:"rgb(243, 243, 66)"},
-      ];
+      //$scope.categorias = [
+      //{id:'1',nombre:'Gourmet',seleccionada:false,color:"rgb(163, 163, 224)"},
+      //{id:'2',nombre:'Tránsito',seleccionada:false,color:"rgb(151, 245, 33)"},
+      //{id:'3',nombre:'Deporte',seleccionada:false,color:"rgb(243, 243, 66)"},
+      //];
       // ARREGLO DE SELECCIONES DE CATEGORIAS
       $scope.selection = [];
 

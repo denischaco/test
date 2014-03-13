@@ -23,8 +23,8 @@
 			<input class="input-inicio" type="text" ng-model="filtro_categoria" placeholder="Buscar"\>
 
 	        <!-- GESTION DE CATEGORIAS INICIO -->
-	        <div ng-controller="GestionCategorias" class="select-inicio" style="height: 140px;">
-                <div ng-repeat="categoria in categorias | filter:filtro_categoria" style="background-color: {{ categoria.color }};">
+	        <div  class="select-inicio" style="height: 150px;" ng-controller="GestionCategorias">
+                <div ng-repeat="categoria in categorias | filter:filtro_categoria" class="select-inicio">
                     <input type="checkbox" name="categoria[{{categoria.id}}]" value="{{categoria.nombre}}" ng-model="categoria.seleccionada" ng-checked="categoria.seleccionada">
                     {{categoria.nombre}}
                 </div>

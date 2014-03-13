@@ -4,14 +4,15 @@
     <a class="item-menu" href="#marcar_alerta">· Marcar Alerta</a>
     <a class="item-menu" href="#puntos">· Ver Lugares</a>
     <a class="item-menu" href="#ver_alertas">· Ver Aquí</a>
+    <!-- input style="margin: 15px;float: right;" class="input-inicio" type="number" ng-controller="VerAlertas" ng-model="filtro_radio"\ -->
     <div style="margin: 15px;float: right;" ng-show="usuario" ng-controller="SeleccionarUsuario">Hola: {{usuario.nombre}}</div>
 </div>                
 
 
-<div class="titulo-seccion">Alertas</div>
+<div class="titulo-seccion" ng-controller="VerAlertas">Alertas</div>
 	<div class="fila-items" ng-repeat="alerta in alertas">
 		<div class="img-item">
-			<img src="img/icons-15.png" />
+			<img src="img/{{alerta.icono}}"/>
 		</div>
 		<a href="#ver_alerta_{{alerta.id}}">
 			<div class="titulo-item" >{{alerta.titulo}} (a {{alerta.distancia | number:2 }} km.)</div>
