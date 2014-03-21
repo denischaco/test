@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>AlertasApp</name>
+    <name>TestAlertasApp</name>
     <description>
-        Primer Sprint
+        Test Primer Sprint
     </description>
     <author email="denis@bitsmkt.com" href="http://bitsmkt.com">
         Bits
