@@ -29,7 +29,7 @@
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
-    <preference name="android-targetSdkVersion" value="15" />
+    <preference name="android-targetSdkVersion" value="18" />
     <preference name="android-installLocation" value="auto" />
 
 
