@@ -59,11 +59,4 @@
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <!-- access origin="http://127.0.0.1*" / -->
 
-    <gap:config-file platform="android" parent="/manifest">
-        <supports-screens 
-            android:xlargeScreens="true" 
-            android:largeScreens="true" 
-            android:smallScreens="true"
-            android:normalScreens="true"/>        
-    </gap:config-file>
 </widget>
