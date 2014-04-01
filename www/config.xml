@@ -56,4 +56,13 @@
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <!-- access origin="http://127.0.0.1*" / -->
+
+    <gap:config-file platform="android" parent="/manifest">
+        <supports-screens 
+            android:xlargeScreens="true" 
+            android:largeScreens="true" 
+            android:smallScreens="true"
+            android:normalScreens="true"/>
+        <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
+    </gap:config-file>
 </widget>
