@@ -7,13 +7,15 @@
     <author email="denis@bitsmkt.com" href="http://bitsmkt.com">
         Bits
     </author>
+
+    <preference name="permissions" value="none" />
     <feature name="http://api.phonegap.com/1.0/device" />
     <feature name="http://api.phonegap.com/1.0/geolocation"/>
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
 
-    <preference name="permissions" value="none" />
+    
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
     <preference name="fullscreen" value="false" />
@@ -27,8 +29,8 @@
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-targetSdkVersion" value="15" />
     <preference name="android-installLocation" value="auto" />
-
 
 
     <icon src="icon.png" />
