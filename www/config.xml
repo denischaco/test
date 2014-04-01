@@ -62,7 +62,6 @@
             android:xlargeScreens="true" 
             android:largeScreens="true" 
             android:smallScreens="true"
-            android:normalScreens="true"/>
-        <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
+            android:normalScreens="true"/>        
     </gap:config-file>
 </widget>
